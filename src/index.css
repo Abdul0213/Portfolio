@@ -1,0 +1,131 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --font-display: 'Syne', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    --font-body: 'DM Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  }
+
+  body {
+    font-family: var(--font-body);
+    background-color: #0E0E0E;
+    color: #F5F5F5;
+    /* clip (not hidden) so position: sticky keeps working */
+    overflow-x: clip;
+  }
+
+  /* When desktop custom cursor is running, hide standard cursor on hoverable devices */
+  @media (hover: hover) and (pointer: fine) {
+    body.custom-cursor-active,
+    body.custom-cursor-active * {
+      cursor: none !important;
+    }
+  }
+}
+
+.font-display {
+  font-family: var(--font-display);
+}
+
+.font-body {
+  font-family: var(--font-body);
+}
+
+/* Outlined typography — stroke follows the element's text color, fill stays hollow */
+.text-stroke {
+  -webkit-text-stroke: 1.5px currentColor;
+  -webkit-text-fill-color: transparent;
+  transition: color 0.3s ease, -webkit-text-fill-color 0.3s ease;
+}
+
+.text-stroke-thick {
+  -webkit-text-stroke: 2px currentColor;
+  -webkit-text-fill-color: transparent;
+}
+
+.text-stroke-hover:hover,
+.group:hover .group-hover-fill {
+  -webkit-text-fill-color: currentColor;
+}
+
+/* Grain overlay noise animation */
+@keyframes grain-shift {
+  0%, 100% { transform: translate(0, 0); }
+  10% { transform: translate(-5%, -10%); }
+  20% { transform: translate(-15%, 5%); }
+  30% { transform: translate(7%, -25%); }
+  40% { transform: translate(-5%, 25%); }
+  50% { transform: translate(-15%, 10%); }
+  60% { transform: translate(15%, 0%); }
+  70% { transform: translate(0%, 15%); }
+  80% { transform: translate(3%, 35%); }
+  90% { transform: translate(-10%, 10%); }
+}
+
+.animate-grain {
+  animation: grain-shift 0.4s steps(4) infinite;
+}
+
+/* Custom minimal scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #0E0E0E;
+}
+::-webkit-scrollbar-thumb {
+  background: #2A2A2A;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #7B5CFF;
+}
+
+
+/* Rotating conic-gradient border (About quote card) */
+@property --border-angle {
+  syntax: '<angle>';
+  inherits: false;
+  initial-value: 0deg;
+}
+
+@keyframes border-spin {
+  to { --border-angle: 360deg; }
+}
+
+.animated-border {
+  border: 1px solid transparent;
+  background:
+    linear-gradient(135deg, #1F1B2B, #141318) padding-box,
+    conic-gradient(from var(--border-angle), #2A2A2A 0deg, #2A2A2A 200deg, #7B5CFF 280deg, #C9BCFF 310deg, #2A2A2A 360deg) border-box;
+  animation: border-spin 6s linear infinite;
+}
+
+/* Gentle floating loop for decorative elements */
+@keyframes float-y {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-14px) rotate(4deg); }
+}
+
+.animate-float {
+  animation: float-y 6s ease-in-out infinite;
+}
+
+/* Small wiggle used on icon hover */
+@keyframes icon-wiggle {
+  0%, 100% { transform: rotate(0deg) scale(1.1); }
+  25% { transform: rotate(-12deg) scale(1.15); }
+  75% { transform: rotate(12deg) scale(1.15); }
+}
+
+.group:hover .group-hover-wiggle {
+  animation: icon-wiggle 0.6s ease-in-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animated-border,
+  .animate-float,
+  .group:hover .group-hover-wiggle {
+    animation: none;
+  }
+}
