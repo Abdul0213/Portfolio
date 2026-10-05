@@ -197,3 +197,66 @@
     animation: none;
   }
 }
+
+/* Hero: purple waves expanding out of the key-art halo */
+.halo-waves {
+  mix-blend-mode: screen;
+  /* show the waves around the top and sides of the halo, fade them out over the subject */
+  /* Container is 4x the halo (halo radius = 12.5%), halo centre at 50%/50%.
+     Two mask layers are unioned: the first shows everything above the halo centre,
+     the second shows both sides all the way down, so only a centre band below the
+     halo (about ±1.15 halo radii, where the subject's body is) stays clear. */
+  -webkit-mask-image:
+    linear-gradient(to bottom, #000 0%, #000 48%, transparent 58%),
+    linear-gradient(to right, #000 0%, #000 32%, transparent 36%, transparent 64%, #000 68%, #000 100%);
+  mask-image:
+    linear-gradient(to bottom, #000 0%, #000 48%, transparent 58%),
+    linear-gradient(to right, #000 0%, #000 32%, transparent 36%, transparent 64%, #000 68%, #000 100%);
+}
+
+/* Container is 8r wide, so closest-side = 4r and the halo edge sits at 25% */
+.halo-glow {
+  position: absolute;
+  inset: 0;
+  border-radius: 9999px;
+  background: radial-gradient(
+    circle closest-side,
+    transparent 22.5%,
+    rgba(140, 110, 255, 0.55) 25.5%,
+    rgba(123, 92, 255, 0.22) 37.5%,
+    rgba(123, 92, 255, 0.08) 49%,
+    transparent 64%
+  );
+  animation: halo-glow 6s ease-in-out infinite;
+  will-change: transform, opacity;
+}
+
+@keyframes halo-glow {
+  0%, 100% { opacity: 0.75; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.05); }
+}
+
+.halo-wave {
+  position: absolute;
+  inset: 37.5%;
+  border-radius: 9999px;
+  border: 3px solid rgba(170, 145, 255, 0.95);
+  box-shadow:
+    0 0 40px 8px rgba(123, 92, 255, 0.6),
+    inset 0 0 36px 6px rgba(123, 92, 255, 0.45);
+  opacity: 0;
+  animation: halo-wave 11s cubic-bezier(0.22, 0.61, 0.36, 1) infinite;
+  will-change: transform, opacity;
+}
+
+@keyframes halo-wave {
+  0% { transform: scale(1); opacity: 0; }
+  10% { opacity: 1; }
+  60% { opacity: 0.4; }
+  100% { transform: scale(3.2); opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .halo-wave { animation: none; display: none; }
+  .halo-glow { animation: none; }
+}
