@@ -152,7 +152,7 @@ export const Work: React.FC = () => {
         SELECTED WORK ✦ CREATIVE ✦
       </div>
 
-      <div className="relative z-10 max-w-[1536px] mx-auto px-6 md:px-12 mb-12">
+      <div className="relative z-10 max-w-[96rem] mx-auto px-6 md:px-12 mb-12">
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-8">
           <div>
@@ -210,8 +210,8 @@ export const Work: React.FC = () => {
                 data-cursor-label="VIEW ↗"
                 className={`group relative shrink-0 rounded-3xl overflow-hidden bg-[#161616] border border-[#2A2A2A] hover:border-[#7B5CFF] transition-all duration-500 cursor-pointer ${
                   idx % 2 === 0
-                    ? 'w-[42vw] max-w-[620px] aspect-[4/3]'
-                    : 'w-[38vw] max-w-[560px] aspect-[16/10]'
+                    ? 'w-[42vw] max-w-[38.75rem] aspect-[4/3]'
+                    : 'w-[38vw] max-w-[35rem] aspect-[16/10]'
                 }`}
               >
                 {/* Fallback & Image */}
@@ -322,7 +322,7 @@ export const Work: React.FC = () => {
 
       {/* Behance CTA card: spinning glow border, marquee backdrop, fanned project previews */}
       <div ref={behanceRef} className="relative z-10 px-6 md:px-12 pb-24 bg-[#0E0E0E] overflow-x-clip">
-        <div className="max-w-[1440px] mx-auto">
+        <div className="max-w-[90rem] mx-auto">
           <a
             href={PORTFOLIO_LINKS.behance}
             target="_blank"
@@ -345,7 +345,7 @@ export const Work: React.FC = () => {
             </div>
 
             {/* Violet glow that brightens on hover */}
-            <div aria-hidden="true" className="absolute -right-20 top-1/2 -translate-y-1/2 w-[32rem] h-[32rem] rounded-full bg-[#7B5CFF]/30 blur-[90px] opacity-60 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+            <div aria-hidden="true" className="absolute -right-20 top-1/2 -translate-y-1/2 w-[32rem] h-[32rem] rounded-full bg-[#7B5CFF]/30 blur-[5.625rem] opacity-60 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
 
             <div className="relative grid lg:grid-cols-12 gap-10 items-center p-8 sm:p-12 lg:p-16">
               {/* Copy + CTA */}

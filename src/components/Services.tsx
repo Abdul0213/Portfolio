@@ -100,7 +100,7 @@ export const Services: React.FC = () => {
       ref={containerRef}
       className="relative py-28 px-6 md:px-12 bg-[#0E0E0E] text-[#F5F5F5] border-t border-[#2A2A2A]"
     >
-      <div className="max-w-[1440px] mx-auto">
+      <div className="max-w-[90rem] mx-auto">
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
           <div>
@@ -132,7 +132,7 @@ export const Services: React.FC = () => {
               {/* Liquid violet background (same shader as the hero), offset per card */}
               <HeroShader timeOffset={index * 11} maxDpr={0.75} className="opacity-90" />
 
-              <div className="relative z-10 flex flex-col justify-between h-full min-h-[260px] md:min-h-[300px]">
+              <div className="relative z-10 flex flex-col justify-between h-full min-h-[16.25rem] md:min-h-[18.75rem]">
                 {/* Card Top: Number & Icon */}
                 <div className="flex items-start justify-between">
                   <span className="text-stroke text-white font-display font-black text-5xl sm:text-7xl md:text-8xl transition-transform duration-500 origin-left group-hover:scale-105 group-hover-fill">

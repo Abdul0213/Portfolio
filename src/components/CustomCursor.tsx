@@ -156,16 +156,16 @@ export const CursorProvider: React.FC<{ children: React.ReactNode }> = ({ childr
               cursorState === 'pointer'
                 ? 'w-14 h-14 -ml-7 -mt-7 rounded-full border-2 border-white bg-white/10 shadow-[0_0_24px_4px_rgba(255,255,255,0.45),inset_0_0_14px_rgba(255,255,255,0.3)]'
                 : cursorState === 'project'
-                ? 'w-[90px] h-[90px] -ml-[45px] -mt-[45px] rounded-full bg-[#7B5CFF] text-white font-display text-xs font-bold tracking-wider shadow-lg shadow-[#7B5CFF]/30'
+                ? 'w-[5.625rem] h-[5.625rem] -ml-[2.8125rem] -mt-[2.8125rem] rounded-full bg-[#7B5CFF] text-white font-display text-xs font-bold tracking-wider shadow-lg shadow-[#7B5CFF]/30'
                 : cursorState === 'headline'
-                ? 'w-[120px] h-[120px] -ml-[60px] -mt-[60px] rounded-full bg-white/10 border border-white/80 backdrop-blur-[1px] shadow-[0_0_30px_rgba(255,255,255,0.35)]'
+                ? 'w-[7.5rem] h-[7.5rem] -ml-[3.75rem] -mt-[3.75rem] rounded-full bg-white/10 border border-white/80 backdrop-blur-[1px] shadow-[0_0_30px_rgba(255,255,255,0.35)]'
                 : cursorState === 'input'
                 ? 'w-8 h-8 -ml-4 -mt-4 rounded-full border border-white/50'
                 : 'w-10 h-10 -ml-5 -mt-5 rounded-full border-[1.5px] border-white/90 shadow-[0_0_16px_3px_rgba(255,255,255,0.4),inset_0_0_10px_rgba(255,255,255,0.25),0_0_0_1px_rgba(0,0,0,0.25)]'
             }`}
           >
             {cursorState === 'project' && (
-              <span className="text-[11px] uppercase tracking-wider font-extrabold text-white text-center leading-none">
+              <span className="text-[0.6875rem] uppercase tracking-wider font-extrabold text-white text-center leading-none">
                 {cursorLabel || 'VIEW ↗'}
               </span>
             )}

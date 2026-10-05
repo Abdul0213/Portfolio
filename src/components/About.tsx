@@ -192,7 +192,7 @@ const Spotlight: React.FC = () => (
 
 const SubHeading: React.FC<{ index: string; children: React.ReactNode }> = ({ index, children }) => (
   <div className="flex items-center gap-3 mb-6">
-    <span className="text-[10px] font-mono text-[#5C5C5C]">{index}</span>
+    <span className="text-[0.625rem] font-mono text-[#5C5C5C]">{index}</span>
     <h3 data-subheading className="text-xs uppercase tracking-[0.25em] text-[#7B5CFF] font-semibold">{children}</h3>
     <span data-line className="h-px flex-1 max-w-24 bg-gradient-to-r from-[#7B5CFF]/60 to-transparent origin-left" />
   </div>
@@ -343,7 +343,7 @@ export const About: React.FC = () => {
       ref={sectionRef}
       className="relative py-28 px-6 md:px-12 bg-[#161616] text-[#F5F5F5] border-t border-[#2A2A2A] overflow-x-clip"
     >
-      <div className="max-w-[1440px] mx-auto">
+      <div className="max-w-[90rem] mx-auto">
         {/* Label */}
         <div className="flex items-center gap-3 text-xs tracking-[0.2em] font-medium text-[#7B5CFF] uppercase mb-10">
           <span>{ABOUT_DATA.label}</span>
@@ -408,7 +408,7 @@ export const About: React.FC = () => {
                           </p>
                         </div>
                       </div>
-                      <span className="absolute right-4 bottom-3 font-mono text-[10px] text-[#3A3A3A] transition-colors duration-500 group-hover:text-[#7B5CFF]">
+                      <span className="absolute right-4 bottom-3 font-mono text-[0.625rem] text-[#3A3A3A] transition-colors duration-500 group-hover:text-[#7B5CFF]">
                         {String(idx + 1).padStart(2, '0')}
                       </span>
                     </div>
@@ -450,7 +450,7 @@ export const About: React.FC = () => {
                           style={{ width: `${lang.proficiency}%` }}
                         />
                       </div>
-                      <span className="text-[10px] font-mono text-[#5C5C5C] transition-colors group-hover:text-[#C9BCFF]">
+                      <span className="text-[0.625rem] font-mono text-[#5C5C5C] transition-colors group-hover:text-[#C9BCFF]">
                         {lang.proficiency}%
                       </span>
                     </div>
@@ -478,7 +478,7 @@ export const About: React.FC = () => {
                       <span className="group-hover-wiggle inline-flex">{getHobbyIcon(item.icon)}</span>
                     </div>
                     <div className="relative min-w-0">
-                      <div className="text-[10px] font-mono text-[#5C5C5C] mb-0.5 transition-colors group-hover:text-[#7B5CFF]">
+                      <div className="text-[0.625rem] font-mono text-[#5C5C5C] mb-0.5 transition-colors group-hover:text-[#7B5CFF]">
                         {String(idx + 1).padStart(2, '0')}
                       </div>
                       <span className="block text-sm sm:text-base font-medium text-[#F5F5F5] transition-transform duration-500 group-hover:translate-x-1">
@@ -497,7 +497,7 @@ export const About: React.FC = () => {
               {/* Ambient glow */}
               <div
                 aria-hidden="true"
-                className="absolute -top-16 -left-16 w-56 h-56 rounded-full bg-[#7B5CFF]/20 blur-[80px] pointer-events-none opacity-60 transition-opacity duration-700 group-hover:opacity-100"
+                className="absolute -top-16 -left-16 w-56 h-56 rounded-full bg-[#7B5CFF]/20 blur-[5rem] pointer-events-none opacity-60 transition-opacity duration-700 group-hover:opacity-100"
               />
               {/* Giant floating quotation mark */}
               <Quote

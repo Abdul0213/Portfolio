@@ -92,7 +92,7 @@ export const Skills: React.FC = () => {
         );
       case 'canva':
         return (
-          <div className="w-16 h-16 rounded-xl bg-gradient-to-br from-[#00C4CC] to-[#7D2AE8] flex items-center justify-center text-white font-serif font-bold italic text-[15px] shadow-lg">
+          <div className="w-16 h-16 rounded-xl bg-gradient-to-br from-[#00C4CC] to-[#7D2AE8] flex items-center justify-center text-white font-serif font-bold italic text-[0.9375rem] shadow-lg">
             Canva
           </div>
         );
@@ -159,7 +159,7 @@ export const Skills: React.FC = () => {
             transform: `rotateX(${tilt.x}deg) rotateY(${tilt.y}deg)`,
             transition: 'transform 0.15s ease-out, border-color 0.3s, box-shadow 0.3s',
           }}
-          className="relative rounded-3xl p-8 bg-gradient-to-br from-[#241C3D] via-[#1F1F1F] to-[#1A1A1A] border border-[#7B5CFF]/20 hover:border-[#7B5CFF]/70 hover:shadow-[0_0_40px_rgba(123,92,255,0.25)] flex flex-col justify-between h-[230px] overflow-hidden group select-none shadow-xl"
+          className="relative rounded-3xl p-8 bg-gradient-to-br from-[#241C3D] via-[#1F1F1F] to-[#1A1A1A] border border-[#7B5CFF]/20 hover:border-[#7B5CFF]/70 hover:shadow-[0_0_40px_rgba(123,92,255,0.25)] flex flex-col justify-between h-[14.375rem] overflow-hidden group select-none shadow-xl"
         >
           {/* Purple corner glow */}
           <div
@@ -209,7 +209,7 @@ export const Skills: React.FC = () => {
       ref={containerRef}
       className="relative py-28 px-6 md:px-12 bg-[#0E0E0E] text-[#F5F5F5] border-t border-[#2A2A2A]"
     >
-      <div className="max-w-[1440px] mx-auto">
+      <div className="max-w-[90rem] mx-auto">
         {/* Section Header */}
         <div className="mb-16">
           <div className="flex items-center gap-3 text-xs tracking-[0.2em] font-medium text-[#7B5CFF] uppercase mb-4">
@@ -241,7 +241,7 @@ export const Skills: React.FC = () => {
 
           <div
             ref={playgroundRef}
-            className="relative w-full min-h-[360px] p-8 sm:p-12 rounded-3xl bg-[#161616] border border-[#2A2A2A] overflow-hidden flex flex-wrap content-center justify-center gap-4 select-none shadow-2xl"
+            className="relative w-full min-h-[22.5rem] p-8 sm:p-12 rounded-3xl bg-[#161616] border border-[#2A2A2A] overflow-hidden flex flex-wrap content-center justify-center gap-4 select-none shadow-2xl"
           >
             {/* Background Hint */}
             <div className="absolute inset-0 flex items-center justify-center pointer-events-none opacity-5">

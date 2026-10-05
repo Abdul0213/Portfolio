@@ -6,6 +6,16 @@
     --font-body: var(--font-dm-sans), 'DM Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   }
 
+  /* Wide screens: grow the root size with the viewport (16px at 1600px, capped at 28px)
+     so every rem-based size — type, spacing, the 90rem content column — scales and the
+     layout fills large monitors instead of sitting in a narrow centre column.
+     Breakpoints are unaffected: media-query rems always use the browser default. */
+  @media (min-width: 1600px) {
+    html {
+      font-size: clamp(16px, 1vw, 28px);
+    }
+  }
+
   body {
     font-family: var(--font-body);
     background-color: #0E0E0E;

@@ -194,7 +194,7 @@ export const Education: React.FC = () => {
       ref={sectionRef}
       className="relative overflow-x-clip py-28 px-6 md:px-12 bg-[#0E0E0E] text-[#F5F5F5] border-t border-[#2A2A2A]"
     >
-      <div className="max-w-[1440px] mx-auto">
+      <div className="max-w-[90rem] mx-auto">
         {/* Section Header */}
         <div className="edu-header flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16">
           <div>

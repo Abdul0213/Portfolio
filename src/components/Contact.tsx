@@ -265,7 +265,7 @@ export const Contact: React.FC<ContactProps> = ({ onShowToast }) => {
       ref={containerRef}
       className="relative py-28 px-6 md:px-12 bg-[#161616] text-[#F5F5F5] border-t border-[#2A2A2A]"
     >
-      <div className="max-w-[1440px] mx-auto">
+      <div className="max-w-[90rem] mx-auto">
         {/* Section Label */}
         <div className="contact-label flex items-center gap-3 text-xs tracking-[0.2em] font-medium text-[#7B5CFF] uppercase mb-4">
           <span>(07) — CONTACT</span>
@@ -287,7 +287,7 @@ export const Contact: React.FC<ContactProps> = ({ onShowToast }) => {
                   The glow is a wide translucent stroke rather than a CSS filter, which
                   would be re-rasterised on every frame of the draw and stutter. */}
               <svg
-                className="absolute -bottom-4 sm:-bottom-6 left-0 w-[260px] sm:w-[420px] md:w-[520px] lg:w-[660px] max-w-full h-4 sm:h-6 pointer-events-none overflow-visible"
+                className="absolute -bottom-4 sm:-bottom-6 left-0 w-[16.25rem] sm:w-[26.25rem] md:w-[32.5rem] lg:w-[41.25rem] max-w-full h-4 sm:h-6 pointer-events-none overflow-visible"
                 viewBox="0 0 500 24"
                 preserveAspectRatio="none"
                 fill="none"

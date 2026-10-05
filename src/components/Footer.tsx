@@ -60,10 +60,10 @@ export const Footer: React.FC = () => {
       {/* Soft purple glow behind the name */}
       <div
         aria-hidden="true"
-        className="absolute left-1/2 bottom-0 -translate-x-1/2 w-[70%] h-64 rounded-full bg-[#7B5CFF]/15 blur-[100px] pointer-events-none"
+        className="absolute left-1/2 bottom-0 -translate-x-1/2 w-[70%] h-64 rounded-full bg-[#7B5CFF]/15 blur-[6.25rem] pointer-events-none"
       />
 
-      <div className="relative max-w-[1440px] mx-auto">
+      <div className="relative max-w-[90rem] mx-auto">
         {/* Top row: monogram + availability, back to top */}
         <div className="footer-top flex items-center justify-between gap-6">
           <div className="flex items-center gap-5">

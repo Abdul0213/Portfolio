@@ -191,7 +191,7 @@ export const Hero: React.FC<HeroProps> = ({ isLoaded }) => {
       <HeroShader />
 
       {/* Top Main Grid */}
-      <div className="relative z-10 max-w-[1440px] w-full mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center my-auto">
+      <div className="relative z-10 max-w-[90rem] w-full mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center my-auto">
         {/* Left Column: Headlines & Copy (7 cols) */}
         <div className="lg:col-span-8 xl:col-span-9 flex flex-col justify-center @container min-w-0">
           {/* Top Label */}
@@ -283,9 +283,9 @@ export const Hero: React.FC<HeroProps> = ({ isLoaded }) => {
         >
           <div
             ref={photoFrameRef}
-            className="relative w-[260px] sm:w-[300px] lg:w-full lg:max-w-[320px] aspect-[3/4] rounded-2xl p-[1.5px] bg-gradient-to-b from-[#7B5CFF] via-[#5530A7]/40 to-transparent shadow-[0_0_50px_rgba(123,92,255,0.25)] overflow-hidden group select-none"
+            className="relative w-[16.25rem] sm:w-[18.75rem] lg:w-full lg:max-w-[20rem] aspect-[3/4] rounded-2xl p-[1.5px] bg-gradient-to-b from-[#7B5CFF] via-[#5530A7]/40 to-transparent shadow-[0_0_50px_rgba(123,92,255,0.25)] overflow-hidden group select-none"
           >
-            <div className="w-full h-full rounded-[15px] overflow-hidden bg-[#161616] relative">
+            <div className="w-full h-full rounded-[0.9375rem] overflow-hidden bg-[#161616] relative">
               {!photoFailed ? (
                 <img
                   ref={photoImgRef}
@@ -308,7 +308,7 @@ export const Hero: React.FC<HeroProps> = ({ isLoaded }) => {
               <div className="absolute inset-x-0 bottom-0 p-5 bg-gradient-to-t from-[#0E0E0E] via-[#0E0E0E]/80 to-transparent flex justify-between items-end">
                 <div>
                   <div className="font-display font-bold text-sm text-white">Abdul Rehman</div>
-                  <div className="text-[11px] text-[#9A9A9A] tracking-wider uppercase">Graphic Designer</div>
+                  <div className="text-[0.6875rem] text-[#9A9A9A] tracking-wider uppercase">Graphic Designer</div>
                 </div>
                 <div className="w-2 h-2 rounded-full bg-[#7B5CFF]" />
               </div>
@@ -318,7 +318,7 @@ export const Hero: React.FC<HeroProps> = ({ isLoaded }) => {
       </div>
 
       {/* Bottom Bar: SCROLL Loop Indicator & Heritage */}
-      <div className="relative z-10 max-w-[1440px] w-full mx-auto flex justify-between items-center pt-8 border-t border-[#2A2A2A]/50 text-xs tracking-[0.2em] uppercase font-mono text-[#5C5C5C]">
+      <div className="relative z-10 max-w-[90rem] w-full mx-auto flex justify-between items-center pt-8 border-t border-[#2A2A2A]/50 text-xs tracking-[0.2em] uppercase font-mono text-[#5C5C5C]">
         <div className="flex items-center gap-3">
           <span className="text-[#9A9A9A]">SCROLL</span>
           <div className="w-8 h-[1px] bg-[#2A2A2A] relative overflow-hidden">

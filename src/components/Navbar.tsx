@@ -134,7 +134,7 @@ export const Navbar: React.FC<NavbarProps> = ({ isLoaded }) => {
         }`}
       >
         <div className="px-6 md:px-12">
-        <div className="max-w-[1440px] mx-auto flex items-center justify-between">
+        <div className="max-w-[90rem] mx-auto flex items-center justify-between">
           {/* Zone 1: Monogram AR. */}
           <a
             href="#top"

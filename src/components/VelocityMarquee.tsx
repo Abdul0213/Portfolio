@@ -87,11 +87,11 @@ export const VelocityMarquee: React.FC = () => {
       style={{ overflowX: 'clip' }}
     >
       {/* Background Accent Gradients */}
-      <div className="absolute top-1/2 left-1/4 -translate-y-1/2 w-96 h-40 bg-[#5530A7]/20 blur-[100px] pointer-events-none" />
-      <div className="absolute top-1/2 right-1/4 -translate-y-1/2 w-96 h-40 bg-[#7B5CFF]/15 blur-[100px] pointer-events-none" />
+      <div className="absolute top-1/2 left-1/4 -translate-y-1/2 w-96 h-40 bg-[#5530A7]/20 blur-[6.25rem] pointer-events-none" />
+      <div className="absolute top-1/2 right-1/4 -translate-y-1/2 w-96 h-40 bg-[#7B5CFF]/15 blur-[6.25rem] pointer-events-none" />
 
       {/* Crossed tape bands — both rows share one grid cell and tilt in opposite directions */}
-      <div className="relative grid grid-cols-[100%] place-items-center h-[200px] sm:h-[320px] lg:h-[420px]">
+      <div className="relative grid grid-cols-[100%] place-items-center h-[12.5rem] sm:h-[20rem] lg:h-[26.25rem]">
         {/* Row 2 (under): Outlined Syne on a dark strip, rising to the right */}
         <div className="col-start-1 row-start-1 justify-self-start relative left-1/2 -translate-x-1/2 -rotate-[5deg] w-[130vw] bg-[#1A1A1A] border-y border-[#7B5CFF]/40 py-3 sm:py-5 overflow-hidden">
           <div ref={row2Ref} className="flex whitespace-nowrap will-change-transform">

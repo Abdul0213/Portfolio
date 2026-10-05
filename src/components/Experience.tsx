@@ -106,7 +106,7 @@ export const Experience: React.FC = () => {
       ref={containerRef}
       className="relative overflow-x-clip py-28 px-6 md:px-12 bg-[#161616] text-[#F5F5F5] border-t border-[#2A2A2A]"
     >
-      <div className="max-w-[1440px] mx-auto">
+      <div className="max-w-[90rem] mx-auto">
         {/* Section Header */}
         <div className="mb-20">
           <div className="flex items-center gap-3 text-xs tracking-[0.2em] font-medium text-[#7B5CFF] uppercase mb-4">
@@ -129,7 +129,7 @@ export const Experience: React.FC = () => {
             {/* Glowing Traveling Dot at tip */}
             <div
               ref={timelineDotRef}
-              className="absolute -left-[5px] -top-1.5 w-3 h-3 rounded-full bg-[#7B5CFF] shadow-[0_0_12px_#7B5CFF] pointer-events-none"
+              className="absolute -left-[0.3125rem] -top-1.5 w-3 h-3 rounded-full bg-[#7B5CFF] shadow-[0_0_12px_#7B5CFF] pointer-events-none"
             />
           </div>
 
@@ -138,7 +138,7 @@ export const Experience: React.FC = () => {
             {EXPERIENCE_DATA.map((exp) => (
               <div key={exp.id} className="experience-entry relative group">
                 {/* Node on line */}
-                <div className="timeline-node absolute -left-[25px] sm:-left-[33px] md:-left-[57px] top-6 w-5 h-5 rounded-full bg-[#0E0E0E] border-2 border-[#7B5CFF] group-hover:bg-[#7B5CFF] transition-colors duration-300 z-10 flex items-center justify-center shadow-[0_0_10px_rgba(123,92,255,0.4)]">
+                <div className="timeline-node absolute -left-[1.5625rem] sm:-left-[2.0625rem] md:-left-[3.5625rem] top-6 w-5 h-5 rounded-full bg-[#0E0E0E] border-2 border-[#7B5CFF] group-hover:bg-[#7B5CFF] transition-colors duration-300 z-10 flex items-center justify-center shadow-[0_0_10px_rgba(123,92,255,0.4)]">
                   <div className="w-1.5 h-1.5 rounded-full bg-white" />
                 </div>
 
