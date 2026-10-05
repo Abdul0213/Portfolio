@@ -13,8 +13,9 @@ import { prefersReducedMotion } from '../lib/motion';
 const SIM_SCALE = 1 / 6; // simulation texels per CSS pixel
 const RENDER_SCALE = 0.5; // canvas pixels per CSS pixel
 const STEPS_PER_FRAME = 2;
+const IDLE_STEPS_PER_FRAME = 1; // resting cursor: rings spread at half speed
 const IDLE_FRAMES = 180; // stop simulating once the waves have died out
-const PULSE_INTERVAL = 70; // frames between rings emitted around a resting cursor
+const PULSE_INTERVAL = 140; // frames (~2.3s) between rings emitted around a resting cursor
 const PULSE_STRENGTH = 1.8;
 const PULSE_RADIUS = 0.032;
 
@@ -266,7 +267,7 @@ export const LiquidRipple: React.FC = () => {
       // PULSE_INTERVAL frames so rings keep spreading out around the dot
       pulseTimer++;
       const pulse = mouse.inside && speed < 0.004 && pulseTimer >= PULSE_INTERVAL;
-      if (pulse || speed >= 0.004) pulseTimer = pulse ? 0 : Math.min(pulseTimer, PULSE_INTERVAL - 20);
+      if (pulse || speed >= 0.004) pulseTimer = pulse ? 0 : Math.min(pulseTimer, PULSE_INTERVAL - 30);
 
       // Simulation steps
       gl.useProgram(simProg);
@@ -276,15 +277,17 @@ export const LiquidRipple: React.FC = () => {
       gl.uniform1i(simU.state, 0);
       gl.activeTexture(gl.TEXTURE0);
 
-      for (let i = 0; i < STEPS_PER_FRAME; i++) {
+      // Fewer sim steps per frame while resting = slower, calmer rings; full speed when moving
+      const steps = speed < 0.004 ? IDLE_STEPS_PER_FRAME : STEPS_PER_FRAME;
+      for (let i = 0; i < steps; i++) {
         // Split the cursor path across the steps so fast moves leave a continuous trail
-        const t0 = i / STEPS_PER_FRAME;
-        const t1 = (i + 1) / STEPS_PER_FRAME;
+        const t0 = i / steps;
+        const t1 = (i + 1) / steps;
         gl.uniform2f(simU.from, mouse.px + (mouse.x - mouse.px) * t0, mouse.py + (mouse.y - mouse.py) * t0);
         gl.uniform2f(simU.to, mouse.px + (mouse.x - mouse.px) * t1, mouse.py + (mouse.y - mouse.py) * t1);
         const pulseStep = pulse && i === 0;
         gl.uniform1f(simU.radius, pulseStep ? PULSE_RADIUS : 0.06);
-        gl.uniform1f(simU.strength, pulseStep ? PULSE_STRENGTH : strength / STEPS_PER_FRAME);
+        gl.uniform1f(simU.strength, pulseStep ? PULSE_STRENGTH : strength / steps);
 
         const write = 1 - read;
         gl.bindFramebuffer(gl.FRAMEBUFFER, targets[write].fbo);
