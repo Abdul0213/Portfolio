@@ -13,19 +13,22 @@ export const ScrollProgress: React.FC = () => {
     const bar = barRef.current;
     if (!bar) return;
 
-    const anim = gsap.to(bar, {
-      scaleX: 1,
-      ease: 'none',
-      scrollTrigger: {
-        trigger: document.documentElement,
-        start: 'top top',
-        end: 'bottom bottom',
-        scrub: 0.15,
-      },
+    // Progress over the real scroll range: start 0 to end 'max' is re-measured on every
+    // refresh, so it stays correct after pinned sections add their scroll space.
+    // scaleX is set explicitly from GSAP (not a Tailwind scale class, which uses the CSS
+    // `scale` property that GSAP folds into its own transform and reads as "already full").
+    const setScale = gsap.quickSetter(bar, 'scaleX');
+    setScale(0);
+
+    const st = ScrollTrigger.create({
+      start: 0,
+      end: 'max',
+      onUpdate: (self) => setScale(self.progress),
+      onRefresh: (self) => setScale(self.progress),
     });
 
     return () => {
-      anim.kill();
+      st.kill();
     };
   }, []);
 
@@ -36,7 +39,8 @@ export const ScrollProgress: React.FC = () => {
     >
       <div
         ref={barRef}
-        className="h-full bg-gradient-to-r from-[#5530A7] via-[#7B5CFF] to-[#7B5CFF] origin-left scale-x-0 shadow-[0_0_10px_#7B5CFF]"
+        style={{ transform: 'scaleX(0)' }}
+        className="h-full bg-gradient-to-r from-[#5530A7] via-[#7B5CFF] to-[#7B5CFF] origin-left shadow-[0_0_10px_#7B5CFF]"
       />
     </div>
   );
