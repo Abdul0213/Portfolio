@@ -1,20 +1,27 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://ai.google.dev/static/site-assets/images/share-ais-513315318.png" />
-</div>
+# Abdul Rehman — Graphic Designer Portfolio
 
-# Run and deploy your AI Studio app
+Animated editorial portfolio built with Next.js (App Router), React 19, Tailwind CSS v4, GSAP and Lenis.
 
-This contains everything you need to run your app locally.
+## Run locally
 
-View your app in AI Studio: https://ai.studio/apps/2b0be6cc-d5eb-4ed6-ad60-0b7896cc66d4
+**Prerequisites:** Node.js 20+
 
-## Run Locally
+1. Install dependencies: `npm install`
+2. Start the dev server: `npm run dev` → http://localhost:3000
 
-**Prerequisites:**  Node.js
+## Scripts
 
+| Command         | What it does                              |
+| --------------- | ----------------------------------------- |
+| `npm run dev`   | Dev server with hot reload on port 3000   |
+| `npm run build` | Production build (static prerender)       |
+| `npm run start` | Serve the production build on port 3000   |
+| `npm run lint`  | Type-check with `tsc --noEmit`            |
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+## Structure
+
+- `src/app/` — Next.js entry: `layout.tsx` (metadata, fonts, global CSS), `page.tsx`, `icon.svg`
+- `src/App.tsx` — client root that composes every section
+- `src/components/` — sections and effects (cursor, liquid ripple, smooth scroll, …)
+- `src/data/portfolio.ts` — all copy, projects, experience and tools
+- `public/` — static files served from `/` (images in `public/images/`, the CV PDF)

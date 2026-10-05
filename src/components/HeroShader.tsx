@@ -1,3 +1,5 @@
+'use client';
+
 import React, { useEffect, useRef, useState } from 'react';
 import { prefersReducedMotion } from '../lib/motion';
 

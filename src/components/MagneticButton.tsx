@@ -1,3 +1,5 @@
+'use client';
+
 import React, { useRef } from 'react';
 import gsap from 'gsap';
 import { EASINGS, prefersReducedMotion } from '../lib/motion';

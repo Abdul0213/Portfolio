@@ -2,8 +2,8 @@
 
 @layer base {
   :root {
-    --font-display: 'Syne', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    --font-body: 'DM Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    --font-display: var(--font-syne), 'Syne', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    --font-body: var(--font-dm-sans), 'DM Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   }
 
   body {
@@ -66,6 +66,23 @@
   animation: grain-shift 0.4s steps(4) infinite;
 }
 
+/* Slow drifting purple orbs behind the education cards */
+@keyframes edu-orb {
+  0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.8; }
+  33% { transform: translate(-60px, 30px) scale(1.15); opacity: 1; }
+  66% { transform: translate(40px, -20px) scale(0.9); opacity: 0.6; }
+}
+
+.animate-edu-orb {
+  animation: edu-orb 8s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-edu-orb {
+    animation: none;
+  }
+}
+
 /* Custom minimal scrollbar */
 ::-webkit-scrollbar {
   width: 6px;
@@ -99,6 +116,47 @@
     linear-gradient(135deg, #1F1B2B, #141318) padding-box,
     conic-gradient(from var(--border-angle), #2A2A2A 0deg, #2A2A2A 200deg, #7B5CFF 280deg, #C9BCFF 310deg, #2A2A2A 360deg) border-box;
   animation: border-spin 6s linear infinite;
+}
+
+/* Behance CTA card: same spinning border, deeper violet fill, brighter sweep */
+.behance-card {
+  border: 1.5px solid transparent;
+  background:
+    radial-gradient(120% 140% at 85% 50%, #3A2873 0%, #1E1636 45%, #121016 100%) padding-box,
+    conic-gradient(from var(--border-angle), #2A2440 0deg, #2A2440 180deg, #7B5CFF 260deg, #FFFFFF 300deg, #7B5CFF 330deg, #2A2440 360deg) border-box;
+  animation: border-spin 5s linear infinite;
+}
+
+/* Endless marquee rows; content is duplicated so -50% loops seamlessly */
+@keyframes behance-marquee {
+  to { transform: translateX(-50%); }
+}
+
+.animate-behance-marquee {
+  animation: behance-marquee 28s linear infinite;
+}
+
+.animate-behance-marquee-reverse {
+  animation: behance-marquee 34s linear infinite reverse;
+}
+
+/* Light sweep across the CTA button */
+@keyframes behance-shine {
+  0% { transform: translateX(-120%) skewX(-20deg); }
+  60%, 100% { transform: translateX(320%) skewX(-20deg); }
+}
+
+.animate-behance-shine {
+  animation: behance-shine 3.2s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .behance-card,
+  .animate-behance-marquee,
+  .animate-behance-marquee-reverse,
+  .animate-behance-shine {
+    animation: none;
+  }
 }
 
 /* Gentle floating loop for decorative elements */

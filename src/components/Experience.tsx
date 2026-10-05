@@ -1,3 +1,5 @@
+'use client';
+
 import React, { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -47,44 +49,54 @@ export const Experience: React.FC = () => {
     // Nodes and content reveals
     const items = gsap.utils.toArray<HTMLElement>('.experience-entry');
     items.forEach((item) => {
-      const node = item.querySelector('.timeline-node');
-      const content = item.querySelector('.experience-card');
+      const node = item.querySelector<HTMLElement>('.timeline-node');
+      const content = item.querySelector<HTMLElement>('.experience-card');
+      if (!node || !content) return;
 
-      if (node) {
-        gsap.fromTo(
-          node,
-          { scale: 0, opacity: 0 },
-          {
-            scale: 1,
-            opacity: 1,
-            duration: 0.6,
-            ease: 'back.out(2)',
-            scrollTrigger: {
-              trigger: item,
-              start: 'top 75%',
-              once: true,
-            },
-          }
-        );
-      }
+      const header = content.querySelector<HTMLElement>('.experience-header');
+      const bullets = content.querySelectorAll<HTMLElement>('li');
 
-      if (content) {
-        gsap.fromTo(
+      // Plays on enter from either direction and reverses on leave,
+      // so the reveal repeats every time the card scrolls into view
+      const tl = gsap.timeline({
+        defaults: { ease: 'power3.out' },
+        scrollTrigger: {
+          trigger: item,
+          start: 'top 85%',
+          end: 'bottom 15%',
+          toggleActions: 'play reverse play reverse',
+        },
+      });
+
+      tl.fromTo(
+        node,
+        { scale: 0, opacity: 0 },
+        { scale: 1, opacity: 1, duration: 0.45, ease: 'back.out(2.5)' }
+      )
+        .fromTo(
           content,
-          { y: 40, opacity: 0 },
           {
-            y: 0,
-            opacity: 1,
-            duration: 0.8,
-            ease: 'power3.out',
-            scrollTrigger: {
-              trigger: item,
-              start: 'top 75%',
-              once: true,
-            },
-          }
+            opacity: 0,
+            x: -60,
+            scale: 0.96,
+            filter: 'blur(12px)',
+            transformOrigin: 'left center',
+          },
+          { opacity: 1, x: 0, scale: 1, filter: 'blur(0px)', duration: 0.9 },
+          '-=0.2'
+        )
+        .fromTo(
+          header,
+          { opacity: 0, y: 20 },
+          { opacity: 1, y: 0, duration: 0.6 },
+          '-=0.55'
+        )
+        .fromTo(
+          bullets,
+          { opacity: 0, x: -20 },
+          { opacity: 1, x: 0, duration: 0.5, stagger: 0.07 },
+          '-=0.4'
         );
-      }
     });
   }, []);
 
@@ -92,7 +104,7 @@ export const Experience: React.FC = () => {
     <section
       id="experience"
       ref={containerRef}
-      className="relative py-28 px-6 md:px-12 bg-[#161616] text-[#F5F5F5] border-t border-[#2A2A2A]"
+      className="relative overflow-x-clip py-28 px-6 md:px-12 bg-[#161616] text-[#F5F5F5] border-t border-[#2A2A2A]"
     >
       <div className="max-w-[1440px] mx-auto">
         {/* Section Header */}
@@ -117,7 +129,7 @@ export const Experience: React.FC = () => {
             {/* Glowing Traveling Dot at tip */}
             <div
               ref={timelineDotRef}
-              className="absolute -left-[5px] top-0 w-3 h-3 rounded-full bg-[#7B5CFF] shadow-[0_0_12px_#7B5CFF] pointer-events-none"
+              className="absolute -left-[5px] -top-1.5 w-3 h-3 rounded-full bg-[#7B5CFF] shadow-[0_0_12px_#7B5CFF] pointer-events-none"
             />
           </div>
 
@@ -126,12 +138,12 @@ export const Experience: React.FC = () => {
             {EXPERIENCE_DATA.map((exp) => (
               <div key={exp.id} className="experience-entry relative group">
                 {/* Node on line */}
-                <div className="timeline-node absolute -left-[27px] sm:-left-[43px] md:-left-[51px] top-6 w-5 h-5 rounded-full bg-[#0E0E0E] border-2 border-[#7B5CFF] group-hover:bg-[#7B5CFF] transition-colors duration-300 z-10 flex items-center justify-center shadow-[0_0_10px_rgba(123,92,255,0.4)]">
+                <div className="timeline-node absolute -left-[25px] sm:-left-[33px] md:-left-[57px] top-6 w-5 h-5 rounded-full bg-[#0E0E0E] border-2 border-[#7B5CFF] group-hover:bg-[#7B5CFF] transition-colors duration-300 z-10 flex items-center justify-center shadow-[0_0_10px_rgba(123,92,255,0.4)]">
                   <div className="w-1.5 h-1.5 rounded-full bg-white" />
                 </div>
 
                 {/* Entry Card */}
-                <div className="experience-card relative rounded-3xl p-8 sm:p-10 bg-[#1F1F1F] border border-[#2A2A2A] hover:border-[#7B5CFF]/50 transition-all duration-300 overflow-hidden shadow-xl">
+                <div className="experience-card relative rounded-3xl p-8 sm:p-10 bg-[#1F1F1F] border border-[#2A2A2A] hover:border-[#7B5CFF]/50 transition-colors duration-300 overflow-hidden will-change-transform shadow-xl">
                   {/* Faded Large Initial in Background on Hover */}
                   <span
                     aria-hidden="true"
@@ -141,7 +153,7 @@ export const Experience: React.FC = () => {
                   </span>
 
                   {/* Header Row */}
-                  <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-6 border-b border-[#2A2A2A] mb-6">
+                  <div className="experience-header flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-6 border-b border-[#2A2A2A] mb-6">
                     <div>
                       <div className="flex items-center gap-3 flex-wrap mb-1">
                         <h3 className="font-display font-extrabold text-2xl sm:text-3xl text-white tracking-tight">

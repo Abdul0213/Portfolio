@@ -12,10 +12,16 @@ server.js
 # Logs & caches
 *.log
 npm-debug.log*
-.vite/
+
 
 # OS / editor
 .DS_Store
 Thumbs.db
 .vscode/
 .idea/
+
+# Next.js
+.next/
+out/
+next-env.d.ts
+*.tsbuildinfo

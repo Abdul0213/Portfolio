@@ -1,3 +1,5 @@
+'use client';
+
 import React, { useState, useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -16,6 +18,42 @@ export const Work: React.FC = () => {
   const containerRef = useRef<HTMLElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
   const parallaxBgRef = useRef<HTMLDivElement>(null);
+  const behanceRef = useRef<HTMLDivElement>(null);
+
+  // First three distinct project images for the Behance CTA preview stack
+  const behancePreviews = Array.from(new Set(PROJECTS_DATA.map((p) => p.image))).slice(0, 3);
+
+  // Behance CTA reveal: replays every time it scrolls into view
+  useEffect(() => {
+    if (prefersReducedMotion() || !behanceRef.current) return;
+
+    const ctx = gsap.context(() => {
+      gsap
+        .timeline({
+          defaults: { ease: 'expo.out' },
+          scrollTrigger: {
+            trigger: behanceRef.current,
+            start: 'top 85%',
+            end: 'bottom 10%',
+            toggleActions: 'play reverse play reverse',
+            // This trigger is created before the horizontal pin (and the pin is rebuilt on
+            // filter changes), so refresh it last; otherwise its start/end are measured
+            // without the pin spacer and the card never reveals
+            refreshPriority: -1,
+          },
+        })
+        .fromTo('.behance-cta', { opacity: 0, y: 80, scale: 0.94 }, { opacity: 1, y: 0, scale: 1, duration: 1.1 })
+        .fromTo('.behance-reveal', { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.8, stagger: 0.1 }, '<0.2')
+        .fromTo(
+          '.behance-thumb',
+          { opacity: 0, y: 120, rotate: (i: number) => (i - 1) * 25 },
+          { opacity: 1, y: 0, rotate: 0, duration: 1.1, stagger: 0.12, ease: 'back.out(1.4)' },
+          '<0.1'
+        );
+    }, behanceRef);
+
+    return () => ctx.revert();
+  }, []);
 
   const filteredProjects = selectedCategory === 'All'
     ? PROJECTS_DATA
@@ -99,6 +137,7 @@ export const Work: React.FC = () => {
   };
 
   return (
+    <>
     <section
       id="work"
       ref={containerRef}
@@ -266,27 +305,6 @@ export const Work: React.FC = () => {
         </div>
       </div>
 
-      {/* Giant CTA Line: SEE MORE ON BEHANCE ↗ */}
-      <div className="relative z-10 px-6 md:px-12 mt-24">
-      <div className="max-w-[1440px] mx-auto pt-12 border-t border-[#2A2A2A] @container">
-        <a
-          href={PORTFOLIO_LINKS.behance}
-          target="_blank"
-          rel="noopener noreferrer"
-          data-cursor="pointer"
-          className="group block text-center py-6 select-none"
-        >
-          <div className="font-display font-black text-[clamp(1.75rem,4.4cqw,6rem)] leading-none tracking-tight uppercase transition-all duration-500 text-stroke group-hover-fill group-hover:text-[#7B5CFF] flex flex-wrap items-center justify-center gap-4">
-            <span>SEE MORE ON BEHANCE</span>
-            <ArrowUpRight className="w-[0.8em] h-[0.8em] shrink-0 inline-block group-hover:translate-x-3 group-hover:-translate-y-3 transition-transform duration-300" />
-          </div>
-          <span className="text-xs font-mono tracking-widest text-[#9A9A9A] uppercase mt-2 block">
-            BEHANCE.NET/ABDULLIFE
-          </span>
-        </a>
-      </div>
-      </div>
-
       {/* Full-Screen Project Modal */}
       <ProjectModal
         project={activeProject}
@@ -301,5 +319,83 @@ export const Work: React.FC = () => {
         totalProjects={filteredProjects.length}
       />
     </section>
+
+      {/* Behance CTA card: spinning glow border, marquee backdrop, fanned project previews */}
+      <div ref={behanceRef} className="relative z-10 px-6 md:px-12 pb-24 bg-[#0E0E0E] overflow-x-clip">
+        <div className="max-w-[1440px] mx-auto">
+          <a
+            href={PORTFOLIO_LINKS.behance}
+            target="_blank"
+            rel="noopener noreferrer"
+            data-cursor="pointer"
+            aria-label="See more of my work on Behance (opens in a new tab)"
+            className="behance-cta behance-card group relative block rounded-[2rem] overflow-hidden select-none shadow-[0_30px_80px_-20px_rgba(123,92,255,0.45)] hover:shadow-[0_40px_120px_-20px_rgba(123,92,255,0.7)] transition-shadow duration-500"
+          >
+            {/* Outlined marquee rows in the background */}
+            <div aria-hidden="true" className="absolute inset-0 flex flex-col justify-center gap-4 opacity-[0.07] group-hover:opacity-[0.14] transition-opacity duration-500 pointer-events-none">
+              {['animate-behance-marquee', 'animate-behance-marquee-reverse'].map((anim) => (
+                <div key={anim} className={`flex w-max whitespace-nowrap ${anim}`}>
+                  {Array.from({ length: 2 }).map((_, half) => (
+                    <span key={half} className="font-display font-black text-[clamp(4rem,9vw,9rem)] leading-none uppercase text-stroke text-white pr-8">
+                      SEE MORE ON BEHANCE ✦ SEE MORE ON BEHANCE ✦ 
+                    </span>
+                  ))}
+                </div>
+              ))}
+            </div>
+
+            {/* Violet glow that brightens on hover */}
+            <div aria-hidden="true" className="absolute -right-20 top-1/2 -translate-y-1/2 w-[32rem] h-[32rem] rounded-full bg-[#7B5CFF]/30 blur-[90px] opacity-60 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+
+            <div className="relative grid lg:grid-cols-12 gap-10 items-center p-8 sm:p-12 lg:p-16">
+              {/* Copy + CTA */}
+              <div className="lg:col-span-7">
+                <div className="behance-reveal flex items-center gap-3 text-xs tracking-[0.2em] font-medium text-[#B49CFF] uppercase mb-5">
+                  <span className="w-2 h-2 rounded-full bg-[#B49CFF] animate-pulse" />
+                  <span>More work · Behance</span>
+                </div>
+                <h3 className="behance-reveal font-display font-black uppercase leading-[0.95] tracking-tight text-[clamp(2.25rem,5vw,4.75rem)] text-white">
+                  Want the{' '}
+                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#B49CFF] via-white to-[#7B5CFF]">full story?</span>
+                </h3>
+                <p className="behance-reveal mt-5 max-w-xl text-base sm:text-lg text-[#C9C2E3] leading-relaxed">
+                  Complete case studies, process shots and every project that didn&apos;t fit on this page.
+                </p>
+
+                <div className="behance-reveal mt-9 flex flex-wrap items-center gap-5">
+                  <span className="relative inline-flex items-center gap-3 overflow-hidden rounded-full bg-white text-[#0E0E0E] pl-7 pr-2 py-2 font-bold uppercase tracking-wider text-sm shadow-[0_0_40px_rgba(255,255,255,0.25)] group-hover:shadow-[0_0_60px_rgba(180,156,255,0.6)] transition-shadow duration-300">
+                    <span aria-hidden="true" className="animate-behance-shine absolute inset-y-0 left-0 w-1/3 bg-gradient-to-r from-transparent via-[#B49CFF]/60 to-transparent pointer-events-none" />
+                    <span className="relative">Open Behance</span>
+                    <span className="relative flex items-center justify-center w-11 h-11 rounded-full bg-[#7B5CFF] text-white group-hover:rotate-45 transition-[rotate] duration-300">
+                      <ArrowUpRight className="w-5 h-5" />
+                    </span>
+                  </span>
+                  <span className="text-xs font-mono tracking-widest text-[#9A93B8] uppercase">behance.net/abdullife</span>
+                </div>
+              </div>
+
+              {/* Fanned project previews: spread apart on hover */}
+              <div aria-hidden="true" className="lg:col-span-5 relative h-64 sm:h-80 hidden sm:block">
+                {behancePreviews.map((src, i) => (
+                  <div key={src} className="behance-thumb absolute left-1/2 top-1/2 w-44 sm:w-56 aspect-[4/5] -ml-22 sm:-ml-28 -mt-[6.9rem] sm:-mt-[8.75rem]" style={{ zIndex: i === 1 ? 3 : 2 - i }}>
+                    <div
+                      className={`w-full h-full rounded-2xl overflow-hidden border border-white/15 shadow-2xl transition-[rotate,translate,scale] duration-500 ease-out ${
+                        i === 0
+                          ? '-rotate-12 -translate-x-16 group-hover:-rotate-[18deg] group-hover:-translate-x-32 group-hover:-translate-y-3'
+                          : i === 1
+                          ? 'rotate-0 group-hover:-translate-y-6 group-hover:scale-105'
+                          : 'rotate-12 translate-x-16 group-hover:rotate-[18deg] group-hover:translate-x-32 group-hover:-translate-y-3'
+                      }`}
+                    >
+                      <img src={src} alt="" loading="lazy" className="w-full h-full object-cover" />
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </>
   );
 };

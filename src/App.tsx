@@ -1,3 +1,5 @@
+'use client';
+
 /**
  * Abdul Rehman — Creative Portfolio
  * Production-ready, fully animated editorial portfolio.
@@ -7,6 +9,7 @@ import React, { useState, useCallback } from 'react';
 import { SmoothScrollProvider } from './components/SmoothScroll';
 import { CursorProvider } from './components/CustomCursor';
 import { GrainOverlay } from './components/GrainOverlay';
+import { LiquidRipple } from './components/LiquidRipple';
 import { ScrollProgress } from './components/ScrollProgress';
 import { Preloader } from './components/Preloader';
 import { Navbar } from './components/Navbar';
@@ -48,6 +51,9 @@ export default function App() {
       <CursorProvider>
         {/* Grain Film Overlay */}
         <GrainOverlay />
+
+        {/* Cursor-driven liquid ripples across the whole page */}
+        <LiquidRipple />
 
         {/* Scroll Progress Bar at very top */}
         <ScrollProgress />

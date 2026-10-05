@@ -1,11 +1,61 @@
-import React, { useRef, useState } from 'react';
+'use client';
+
+import React, { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { TOOLS_DATA, SKILLS_PLAYGROUND_LIST, ToolItem } from '../data/portfolio';
 import { prefersReducedMotion } from '../lib/motion';
+
+gsap.registerPlugin(ScrollTrigger);
 
 export const Skills: React.FC = () => {
   const containerRef = useRef<HTMLElement>(null);
   const playgroundRef = useRef<HTMLDivElement>(null);
+  const toolsGridRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (prefersReducedMotion() || !toolsGridRef.current) return;
+
+    const grid = toolsGridRef.current;
+    const cards = grid.querySelectorAll<HTMLElement>('.tool-card');
+    const logos = grid.querySelectorAll<HTMLElement>('.tool-logo');
+    const texts = grid.querySelectorAll<HTMLElement>('.tool-text');
+
+    // Plays on enter from either direction and reverses on leave,
+    // so the reveal repeats every time the grid scrolls into view
+    const ctx = gsap.context(() => {
+      const tl = gsap.timeline({
+        defaults: { ease: 'power3.out' },
+        scrollTrigger: {
+          trigger: grid,
+          start: 'top 85%',
+          end: 'bottom 15%',
+          toggleActions: 'play reverse play reverse',
+        },
+      });
+
+      tl.fromTo(
+        cards,
+        { opacity: 0, y: 60, scale: 0.94, filter: 'blur(12px)' },
+        { opacity: 1, y: 0, scale: 1, filter: 'blur(0px)', duration: 0.9, stagger: 0.1 }
+      )
+        .fromTo(
+          logos,
+          { opacity: 0, scale: 0.4, rotate: -12 },
+          { opacity: 1, scale: 1, rotate: 0, duration: 0.6, ease: 'back.out(2)', stagger: 0.1 },
+          '-=0.8'
+        )
+        .fromTo(
+          texts,
+          { opacity: 0, y: 16 },
+          { opacity: 1, y: 0, duration: 0.5, stagger: 0.1 },
+          '-=0.6'
+        );
+    }, grid);
+
+    return () => ctx.revert();
+  }, []);
 
   // Recreated logo renderers in pure CSS & inline SVG
   const renderToolLogo = (tool: ToolItem) => {
@@ -42,15 +92,26 @@ export const Skills: React.FC = () => {
         );
       case 'canva':
         return (
-          <div className="w-16 h-16 rounded-xl bg-gradient-to-br from-[#00C4CC] to-[#7D2AE8] flex items-center justify-center text-white font-serif font-bold italic text-xl shadow-lg">
+          <div className="w-16 h-16 rounded-xl bg-gradient-to-br from-[#00C4CC] to-[#7D2AE8] flex items-center justify-center text-white font-serif font-bold italic text-[15px] shadow-lg">
             Canva
           </div>
         );
       case 'capcut':
         return (
-          <div className="w-16 h-16 rounded-xl bg-black border border-white/30 flex items-center justify-center p-3 shadow-lg">
-            <svg viewBox="0 0 24 24" className="w-9 h-9 fill-white">
-              <path d="M4 4h7v4H8v8h3v4H4V4zm9 0h7v4h-3v8h3v4h-7V4z" />
+          <div className="w-16 h-16 rounded-xl bg-black border border-white/30 flex items-center justify-center shadow-lg">
+            {/* CapCut mark: open brackets joined by a crossed "cut" */}
+            <svg
+              viewBox="0 0 24 24"
+              className="w-10 h-10"
+              fill="none"
+              stroke="white"
+              strokeWidth={2.2}
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <path d="M9 6.5H5a1.5 1.5 0 0 0-1.5 1.5v8A1.5 1.5 0 0 0 5 17.5h4" />
+              <path d="M15 6.5h4a1.5 1.5 0 0 1 1.5 1.5v8a1.5 1.5 0 0 1-1.5 1.5h-4" />
+              <path d="M9 6.5l6 11M15 6.5l-6 11" />
             </svg>
           </div>
         );
@@ -91,37 +152,49 @@ export const Skills: React.FC = () => {
         style={{
           perspective: 1000,
         }}
-        className="w-full"
+        className="tool-card w-full"
       >
         <div
           style={{
             transform: `rotateX(${tilt.x}deg) rotateY(${tilt.y}deg)`,
-            transition: 'transform 0.15s ease-out',
+            transition: 'transform 0.15s ease-out, border-color 0.3s, box-shadow 0.3s',
           }}
-          className="relative rounded-3xl p-8 bg-[#1F1F1F] border border-[#2A2A2A] hover:border-[#7B5CFF]/60 flex flex-col justify-between h-[230px] overflow-hidden group select-none shadow-xl"
+          className="relative rounded-3xl p-8 bg-gradient-to-br from-[#241C3D] via-[#1F1F1F] to-[#1A1A1A] border border-[#7B5CFF]/20 hover:border-[#7B5CFF]/70 hover:shadow-[0_0_40px_rgba(123,92,255,0.25)] flex flex-col justify-between h-[230px] overflow-hidden group select-none shadow-xl"
         >
+          {/* Purple corner glow */}
+          <div
+            aria-hidden="true"
+            className="absolute -top-16 -left-16 w-48 h-48 rounded-full bg-[#7B5CFF]/20 blur-3xl pointer-events-none opacity-60 group-hover:opacity-100 transition-opacity duration-500"
+          />
+
           {/* Moving glare highlight */}
           <div
             aria-hidden="true"
             className="absolute inset-0 pointer-events-none transition-opacity duration-300"
             style={{
               opacity: tilt.opacity,
-              background: `radial-gradient(circle at ${tilt.glareX}% ${tilt.glareY}%, rgba(255,255,255,0.3) 0%, transparent 60%)`,
+              background: `radial-gradient(circle at ${tilt.glareX}% ${tilt.glareY}%, rgba(155,125,255,0.45) 0%, transparent 60%)`,
             }}
           />
 
-          <div className="flex items-start justify-between">
-            {renderToolLogo(tool)}
-            <span className="text-xs font-mono text-[#5C5C5C] group-hover:text-[#7B5CFF] transition-colors">
+          {/* Purple accent bar that grows on hover */}
+          <div
+            aria-hidden="true"
+            className="absolute bottom-0 left-0 h-[3px] w-1/4 group-hover:w-full bg-gradient-to-r from-[#7B5CFF] to-[#B49CFF] transition-all duration-500"
+          />
+
+          <div className="relative flex items-start justify-between">
+            <div className="tool-logo">{renderToolLogo(tool)}</div>
+            <span className="text-xs font-mono text-[#7B5CFF]/70 group-hover:text-[#B49CFF] transition-colors">
               (0{index + 1})
             </span>
           </div>
 
-          <div>
+          <div className="tool-text relative">
             <h3 className="font-display font-bold text-2xl text-[#F5F5F5] group-hover:text-white mb-1">
               {tool.name}
             </h3>
-            <p className="text-xs font-mono text-[#9A9A9A] tracking-wider uppercase">
+            <p className="text-xs font-mono text-[#9A9A9A] group-hover:text-[#B49CFF] tracking-wider uppercase transition-colors">
               {tool.role}
             </p>
           </div>
@@ -149,7 +222,7 @@ export const Skills: React.FC = () => {
         </div>
 
         {/* 5 Tools 3D Tilt Cards Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 mb-20">
+        <div ref={toolsGridRef} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 mb-20">
           {TOOLS_DATA.map((tool, idx) => (
             <ToolCard key={tool.name} tool={tool} index={idx} />
           ))}

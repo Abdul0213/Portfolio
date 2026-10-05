@@ -191,7 +191,7 @@ export const PROJECTS_DATA: Project[] = [
     description:
       'Property brochures, listing creatives and launch campaign visuals for a UAE real estate client.',
     tags: ['Real Estate', 'Branding', 'Brochures', 'UAE Market'],
-    image: '/src/assets/images/project_real_estate_1790922476156.jpg',
+    image: '/images/project_real_estate_1790922476156.jpg',
     gradientFallback: 'radial-gradient(circle at 70% 30%, #5530A7 0%, #161616 65%, #0E0E0E 100%)',
     behanceUrl: 'https://www.behance.net/abdullife',
   },
@@ -204,7 +204,7 @@ export const PROJECTS_DATA: Project[] = [
     description:
       'Conversion-focused ad creatives, product visuals and web banners for a UAE SaaS brand.',
     tags: ['SaaS Ads', 'Banners', 'Conversion', 'Digital UI'],
-    image: '/src/assets/images/project_saas_ad_1790922495531.jpg',
+    image: '/images/project_saas_ad_1790922495531.jpg',
     gradientFallback: 'radial-gradient(circle at 30% 70%, #7B5CFF 0%, #1F1F1F 55%, #0E0E0E 100%)',
     behanceUrl: 'https://www.behance.net/abdullife',
   },
@@ -217,7 +217,7 @@ export const PROJECTS_DATA: Project[] = [
     description:
       'Appetizing social media creatives and menu design for a UAE food brand.',
     tags: ['Food & Beverage', 'Menu Design', 'Social Media', 'Creative Direction'],
-    image: '/src/assets/images/project_restaurant_social_1790922508641.jpg',
+    image: '/images/project_restaurant_social_1790922508641.jpg',
     gradientFallback: 'radial-gradient(circle at 60% 40%, #E3242B 0%, #2A1520 45%, #0E0E0E 100%)',
     behanceUrl: 'https://www.behance.net/abdullife',
   },
@@ -230,7 +230,7 @@ export const PROJECTS_DATA: Project[] = [
     description:
       'Company profile and product catalog for a mechanical/industrial brand.',
     tags: ['Company Profile', 'Technical Catalog', 'Branding', 'Editorial'],
-    image: '/src/assets/images/project_packaging_3d_1790922523095.jpg',
+    image: '/images/project_packaging_3d_1790922523095.jpg',
     gradientFallback: 'radial-gradient(circle at 50% 50%, #5530A7 0%, #1F1F1F 60%, #0E0E0E 100%)',
     behanceUrl: 'https://www.behance.net/abdullife',
   },
@@ -243,7 +243,7 @@ export const PROJECTS_DATA: Project[] = [
     description:
       'Realistic 3D packaging and product mockups visualized before production.',
     tags: ['3D Mockups', 'Cosmetic Packaging', 'Product Visualization', 'Chiltan Pure'],
-    image: '/src/assets/images/project_packaging_3d_1790922523095.jpg',
+    image: '/images/project_packaging_3d_1790922523095.jpg',
     gradientFallback: 'radial-gradient(circle at 40% 60%, #7B5CFF 0%, #161616 60%, #0E0E0E 100%)',
     behanceUrl: 'https://www.behance.net/abdullife',
   },
@@ -256,7 +256,7 @@ export const PROJECTS_DATA: Project[] = [
     description:
       'Performance-driven ad graphics and campaign visuals aligned with a premium brand identity.',
     tags: ['Meta Ads', 'Social Media', 'Brand Strategy', 'Performance Graphics'],
-    image: '/src/assets/images/project_restaurant_social_1790922508641.jpg',
+    image: '/images/project_restaurant_social_1790922508641.jpg',
     gradientFallback: 'radial-gradient(circle at 75% 25%, #5530A7 0%, #2A2A2A 60%, #0E0E0E 100%)',
     behanceUrl: 'https://www.behance.net/abdullife',
   },
@@ -269,7 +269,7 @@ export const PROJECTS_DATA: Project[] = [
     description:
       'Logo, color palette and typography system kept consistent across all materials.',
     tags: ['Logo Design', 'Visual Identity', 'Color Palette', 'Brand Guidelines'],
-    image: '/src/assets/images/project_saas_ad_1790922495531.jpg',
+    image: '/images/project_saas_ad_1790922495531.jpg',
     gradientFallback: 'radial-gradient(circle at 20% 80%, #7B5CFF 0%, #161616 55%, #0E0E0E 100%)',
     behanceUrl: 'https://www.behance.net/abdullife',
   },
@@ -282,7 +282,7 @@ export const PROJECTS_DATA: Project[] = [
     description:
       'A clear presentation explaining how an app was planned and designed.',
     tags: ['UI/UX', 'Figma', 'Flows', 'App Architecture'],
-    image: '/src/assets/images/project_real_estate_1790922476156.jpg',
+    image: '/images/project_real_estate_1790922476156.jpg',
     gradientFallback: 'radial-gradient(circle at 60% 60%, #5530A7 0%, #1F1F1F 55%, #0E0E0E 100%)',
     behanceUrl: 'https://www.behance.net/abdullife',
   },
@@ -421,4 +421,4 @@ export const EDUCATION_DATA = [
   },
 ];
 
-export const HERO_PROFILE_IMAGE = '/src/assets/images/abdul_rehman_portrait_1790922540468.jpg';
+export const HERO_PROFILE_IMAGE = '/images/abdul_rehman_portrait_1790922540468.jpg';
